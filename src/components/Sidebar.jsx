@@ -31,10 +31,10 @@ const Sidebar = () => {
                   </Link>
                 </li>
                 <li>
-                  <a className="nav-item nav-link d-flex align-items-center" href="#">
+                  <Link className="nav-item nav-link d-flex align-items-center" to="/library">
                     <BookFill style={{ width: "24px", height: "24px" }} />
                     &nbsp; Your Library
-                  </a>
+                  </Link>
                 </li>
                 <li>
                   <Link className="nav-item nav-link d-flex align-items-center" to="/favourites">
