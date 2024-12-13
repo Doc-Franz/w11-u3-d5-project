@@ -1,6 +1,7 @@
 import { Button, Container, Form, InputGroup, Nav, Navbar } from "react-bootstrap";
 import logo from "../assets/logo.png";
-import { HouseDoorFill, BookFill } from "react-bootstrap-icons";
+import { HouseDoorFill, BookFill, List } from "react-bootstrap-icons";
+import { Link } from "react-router-dom";
 
 const Sidebar = () => {
   return (
@@ -24,16 +25,22 @@ const Sidebar = () => {
             <Nav className="navbar-nav">
               <ul>
                 <li>
-                  <Nav.Link href="#" className="nav-item nav-link d-flex align-items-center">
+                  <Link to="/" className="nav-item nav-link d-flex align-items-center">
                     <HouseDoorFill style={{ width: "24px", height: "24px" }} />
                     &nbsp; Home
-                  </Nav.Link>
+                  </Link>
                 </li>
                 <li>
                   <a className="nav-item nav-link d-flex align-items-center" href="#">
                     <BookFill style={{ width: "24px", height: "24px" }} />
                     &nbsp; Your Library
                   </a>
+                </li>
+                <li>
+                  <Link className="nav-item nav-link d-flex align-items-center" to="/favourites">
+                    <List style={{ width: "24px", height: "24px" }} />
+                    &nbsp; Your List
+                  </Link>
                 </li>
                 <li>
                   <InputGroup className="mt-3">
