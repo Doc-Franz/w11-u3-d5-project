@@ -4,10 +4,26 @@ import prev from "../assets/prev.png";
 import play from "../assets/play.png";
 import next from "../assets/next.png";
 import repeat from "../assets/repeat.png";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { HeartFill } from "react-bootstrap-icons";
+import { addToFavourites, removeFromFavourites } from "../redux/actions";
 
 const Player = () => {
   const songToPlay = useSelector((state) => state.player.content);
+  const favourites = useSelector((state) => state.player.favouriteSongs);
+  const dispatch = useDispatch();
+
+  const isFavourite = songToPlay ? favourites.find((singleSong) => singleSong.id === songToPlay.id) !== undefined : false;
+
+  const handleClick = (song) => {
+    const indexOfSong = favourites.findIndex((obj) => obj.id === song.id);
+
+    if (indexOfSong !== -1) {
+      dispatch(removeFromFavourites(indexOfSong));
+    } else {
+      dispatch(addToFavourites(song));
+    }
+  };
 
   return (
     <Container fluid className=" fixed-bottom bg-container pt-1">
@@ -15,7 +31,20 @@ const Player = () => {
         <Col className="col-lg-10 offset-lg-2">
           <Row className={`row h-100 d-flex justify-content-center align-items-center`}>
             {songToPlay && (
-              <Col className="col-6 col-md-4 d-flex justify-content-start">
+              <Col className="col-6 col-md-4 d-flex d-flex align-items-center">
+                <HeartFill
+                  className="me-3 "
+                  style={{
+                    cursor: "pointer",
+                    fill: isFavourite ? "white" : "transparent",
+                    stroke: "white",
+                    strokeWidth: 2
+                  }}
+                  viewBox="-1 0 18 16"
+                  onClick={() => {
+                    handleClick(songToPlay);
+                  }}
+                />
                 <img className="img-fluid me-3" src={songToPlay.album.cover_medium} alt="track" style={{ width: "70px", height: "70px" }} />
                 <p style={{ color: "white", fontSize: "0.8rem" }}>
                   Track: {songToPlay.title}
